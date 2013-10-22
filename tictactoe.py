@@ -92,6 +92,7 @@ if __name__ == "__main__":
 
 	while running: 
 		new_board.player_move()   #human player is prompted to make move
+		time.sleep(1)
 	 	new_board.show_board()	 #board is shown
 	 	new_board.moves += 1	 #indicate 1 move has been made
 	 	print "Number of moves: ", new_board.moves  #display total number of moves
@@ -112,11 +113,12 @@ if __name__ == "__main__":
 	 		break  #stop running the while loop
 
 
-	 	time.sleep(0.5)  
+	 	time.sleep(1)  
 	 	print "Computer's Move:"   #indicate that it is computer's move
-	 	time.sleep(0.5)
+	 	time.sleep(1)
 
 	 	new_board.computer_move()   #computer makes move
+	 	time.sleep(0.5)
 	 	new_board.show_board()      #show board again
 	 	new_board.moves += 1		# add 1 to moves
 	 	print "Number of moves: ", new_board.moves  #display numb of moves
