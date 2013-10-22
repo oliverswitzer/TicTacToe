@@ -1,4 +1,11 @@
-#Oliver's Tic Tac Toe game in Python
+# Oliver's Tic Tac Toe game in Python
+# For Flatiron Fellowship Application
+
+# Contact:
+# Oliver Switzer
+# oliverswitzer@gmail.com
+# 347-581-1089
+
 
 import random
 import time 
@@ -6,7 +13,7 @@ import time
 class Board:
 
 	moves = 0   # moves counter
-	board = [0, 1, 2,
+	board = [0, 1, 2,   #initalize board list
 			 3, 4, 5,
 			 6, 7, 8]
 
