@@ -5,6 +5,7 @@ import time
 
 class Board:
 
+	moves = 0   # moves counter
 	board = [0, 1, 2,
 			 3, 4, 5,
 			 6, 7, 8]
@@ -13,7 +14,7 @@ class Board:
 		print
 		print "Welcome! Care for a game of Tic Tac Toe?"
 
-	def show_board(self):
+	def show_board(self):   #this function prints out the board
 		print 
 		print self.board[0],"|",self.board[1],"|",self.board[2]
 		print "-" * 9
@@ -36,7 +37,7 @@ class Board:
 
 	def computer_move(self):
 		random.seed()  # a random generator
-		comp_move_numb = random.randint(0,8)
+		comp_move_numb = random.randint(0,8)   #selects a random number form 0-8 for computer move
 		
 		computersMove = True #while it is computer player's turn
 		while computersMove:  #run this loop
@@ -47,23 +48,86 @@ class Board:
 				computersMove = True   #it is still the computers turn
 				comp_move_numb = random.randint(0,8)   # computer must choose a different place to place its mark
 
+	def lineWin_test(self, symb, pos1, pos2, pos3):
+		if self.board[pos1] == symb and self.board[pos2] == symb and self.board[pos3] == symb:  #if 'o' or 'x' (designated via symb variable) is found in these three positions
+			return True    																#return true
+
+	def checkWin(self, symb):   #this checks all possible ways to win the game. Takes symb as input either 'x' or 'o'
+		if self.lineWin_test(symb, 0, 1, 2): #check horiz lines
+			return True
+		if self.lineWin_test(symb, 3, 4, 5):
+			return True
+		if self.lineWin_test(symb, 6, 7, 8):
+			return True
+		##
+		if self.lineWin_test(symb, 0, 4, 8): #check diag lines
+			return True
+		if self.lineWin_test(symb, 6, 4, 2):
+			return True
+		##
+		if self.lineWin_test(symb, 0, 3, 6):  #check vert lines
+			return True
+		if self.lineWin_test(symb, 1, 4, 7):
+			return True
+		if self.lineWin_test(symb, 2, 5, 8):
+			return True
+		##
+
+
 		
 if __name__ == "__main__":
-	new_board = Board()
+	new_board = Board()   #instantiate new board from Board class
 
-	new_board.welcome()
-	new_board.show_board()
+	new_board.welcome()   #welcome player
+	new_board.show_board()   #show the board
 
-	running = True
+	running = True  # set our while loop logic to true
 
 	while running: 
-		new_board.player_move()
-	 	new_board.show_board()
-	 	time.sleep(1)
-	 	print "Computer's Move:"
-	 	# time.sleep(1)
-	 	new_board.computer_move()
-	 	new_board.show_board()
+		new_board.player_move()   #human player is prompted to make move
+	 	new_board.show_board()	 #board is shown
+	 	new_board.moves += 1	 #indicate 1 move has been made
+	 	print "Number of moves: ", new_board.moves  #display total number of moves
+	 	print
+
+	 	if new_board.checkWin('x') == True:   #check to see if human player has won using checkWin function with 'x' as input
+	 		time.sleep(0.5)
+	 		print
+	 		print "Player x wins :)"
+			print	
+	 		time.sleep(0.5)
+	 		break  #stop running the while loop
+
+	 	if new_board.moves == 9:    #if the number of moves made is 9 and no one has won, then the game is over.
+	 		print
+	 		print "*Yawn* nobody wins. Game Over, try again."
+	 		time.sleep(0.5)
+	 		break  #stop running the while loop
+
+
+	 	time.sleep(0.5)  
+	 	print "Computer's Move:"   #indicate that it is computer's move
+	 	time.sleep(0.5)
+
+	 	new_board.computer_move()   #computer makes move
+	 	new_board.show_board()      #show board again
+	 	new_board.moves += 1		# add 1 to moves
+	 	print "Number of moves: ", new_board.moves  #display numb of moves
+	 	print
+
+	 	if new_board.checkWin('o') == True:   #check to see if computer has one. Input 'o' as symbol to check on board
+	 		time.sleep(0.5)
+	 		print
+	 		print "Player x loses :("
+	 		print
+	 		time.sleep(0.5)
+	 		break    #stop running the while loop
+
+	 	if new_board.moves == 9: #if the number of moves made is 9 and no one has won, then the game is over.
+	 		print
+	 		print "*Yawn* nobody wins. Game Over, try again."
+	 		time.sleep(0.5)
+	 		break  #stop running the while loop
 
 
 	
