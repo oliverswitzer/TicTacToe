@@ -35,19 +35,19 @@ class Board:
 		playersMove = True  #while it is human player's turn
 		while playersMove:  #run this loop
 			print # for extra space
-			try:			
+			try:  # Try block used to create cases where user input should raise an error
 				move_number = int(raw_input("Choose a number on the board to place your x: ")) #take user input and convert to int type
-			except ValueError:
+			except ValueError:  #if a valueerror is returned want to tell the user to enter an integer
 				print
 				print "*** Please enter a single, integer value ***" 
 				continue
-			if move_number < 0 or move_number > 8:
+			if move_number < 0 or move_number > 8:  #if number is not in this range an error message is displayed. Players move is still true
 				print
 				print "*** Please choose a number between 0 and 8 ***"
 			elif self.board[move_number] != 'x' and self.board[move_number] != 'o':   #if spot is not already taken by an x or an o
 				self.board[move_number] = 'x'  #place your x on a numbered spot on the board
-				playersMove = False
-			else: 
+				playersMove = False  #human players turn is now over
+			else:    #if the user chooses a spot that already has an x or an o in it
 				print
 				print "*** This spot is already taken! ***"
 
