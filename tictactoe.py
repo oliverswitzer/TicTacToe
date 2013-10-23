@@ -34,13 +34,22 @@ class Board:
 
 		playersMove = True  #while it is human player's turn
 		while playersMove:  #run this loop
-			print 			# for extra space
-			move_number = int(raw_input("Choose a number on the board to place your x: "))  #take user input and convert to int type
-			if self.board[move_number] != 'x' and self.board[move_number] != 'o':   #if spot is not already taken by an x or an o
+			print # for extra space
+			try:			
+				move_number = int(raw_input("Choose a number on the board to place your x: ")) #take user input and convert to int type
+			except ValueError:
+				print
+				print "*** Please enter a single, integer value ***" 
+				continue
+			if move_number < 0 or move_number > 8:
+				print
+				print "*** Please choose a number between 0 and 8 ***"
+			elif self.board[move_number] != 'x' and self.board[move_number] != 'o':   #if spot is not already taken by an x or an o
 				self.board[move_number] = 'x'  #place your x on a numbered spot on the board
 				playersMove = False
 			else: 
-				print "This spot is already taken!"
+				print
+				print "*** This spot is already taken! ***"
 
 	def computer_move(self):
 		random.seed()  # a random generator
